@@ -13,7 +13,7 @@ import java.util.ArrayList;public class TaskHeapArrayList {
 	 */
 	public TaskHeapArrayList() {
 		this.tasks = new ArrayList<>();
-		this.tasks.add(null);
+		this.tasks.add(null); //Damit Index bei 1 anfängt
 	}
 
 	/**
@@ -23,6 +23,9 @@ import java.util.ArrayList;public class TaskHeapArrayList {
 	 */
 	public void insert(Task t) {
 		// TODO: Your implementation
+		tasks.add(t);
+		swim(tasks.size()-1);
+
 
 	}
 
@@ -33,24 +36,31 @@ import java.util.ArrayList;public class TaskHeapArrayList {
 	 */
 	public Task remove() {
 		// TODO: Your implementation
+		if (tasks.size() <= 1)
 		return null;
+		Task result = tasks.get(1); //hole mir oberstes Element
+		tasks.set(1, tasks.get(tasks.size() -1)); //Überschreiben oberste Element mit dem letzten
+		tasks.remove(tasks.size() -1); //Löschen letztes Element raus
+
+		sink(1); //lassen oberste hinuntersinken
+		return result;
 	}
 
 	private void swim(int pos) {
 		// let the first swim if > test if it hasChildren;
-		while (pos > 1) {
-			if (prio(parent(pos)) < prio(pos))   //     2     5
+		while (pos > 1) { //solange irgendwo drinnen sind
+			if (prio(parent(pos)) < prio(pos))   //     2     5 //Parent kleiner als aktiver
 				break;
 			exchange(parent(pos), pos); // change to positions   //  1    2
 			pos = parent(pos); // set new pos;
 		}
 	}
 
-	private void sink(int pos) {
+	private void sink(int pos) { //Prüfung min zu max Heap umbauen
 		// double the position _> 2
 		int left = left(pos);
 		int right = right(pos);
-		int res = pos; // 1
+		int res = pos; // 1 //wo befinde ich mich im Array? wird index berechnet
 
 		if(hasChildren(pos)) { // if has two children
 			if (exists(right)) { // if exist one right
@@ -98,6 +108,7 @@ import java.util.ArrayList;public class TaskHeapArrayList {
 		temp = tasks.get(pos1);
 		tasks.set(pos1, tasks.get(pos2));
 		tasks.set(pos2, temp);
+
 	}
 
 	private boolean hasChildren(int pos) {

@@ -13,7 +13,7 @@ public class VertexHeap {
 	
 	public VertexHeap(int size) {
 		this.capicity = size+1;
-		pvertex = new Vertex[size+1];
+		pvertex = new Vertex[size+1]; //+1 weil man meistens mit 1 anfängt --> Position 0 bleibt frei
 	}
 	
 	private int parent(int pos) {

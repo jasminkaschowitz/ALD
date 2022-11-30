@@ -9,6 +9,7 @@ public class Wörterbuch {
 	 * Wurzel des Baums (Startknoten)
 	 */
 	private Wort root;
+	private int counter =1;
 	
 	public Wort getRoot() {
 		return root;
@@ -20,10 +21,24 @@ public class Wörterbuch {
 	 * @return Zahl der Wörter (=Anzahl der Elemente)
 	 */
 	public int countWordsInSubTree(Wort w) {
-		
-		return 0;
-	}
+		if (w == null) {
+			return 0;
+		}
+		Wort start = find(w.getWort());
 
+			if (start.getLeft() != null) {
+				counter++;
+				w = start.getLeft();
+				countWordsInSubTree(w);
+			}
+			if (start.getRight() != null) {
+				counter++;
+				w = start.getRight();
+				countWordsInSubTree(w);
+			}
+
+		return counter;
+	}
 	/**
 	 * Liefert die Menge aller Wörter retour, die ein spezifisches Präfix haben.
 	 * @param prefix Wörter müssen diesen Präfix haben
@@ -84,10 +99,13 @@ public class Wörterbuch {
 		}
 		else if (vgl < 0) {	// Links
 			return find(current.getLeft(), s);
+
 		}
 		else {				// Rechts
 			return find(current.getRight(), s);
 		}
+
 	}
+
 	
 }

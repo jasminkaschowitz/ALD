@@ -10,5 +10,7 @@ public class WeightedEdge {
 		this.to_vertex = to_vertex;
 		this.weight = weight;
 	}
+	//z.B. von Graz nach Leoben in 45 km
+	//von A nach B mit welchem Gewicht
 	
 }

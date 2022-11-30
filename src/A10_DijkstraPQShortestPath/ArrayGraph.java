@@ -4,8 +4,10 @@ import java.util.List;
 
 
 public class ArrayGraph implements Graph {
+	//Alternative Abwicklung mit Array
 
-	private int[][] graph;
+	private int[][] graph; //machen eine zweidimensionelle Matrix
+	//Nachteile bei z.B. 1000 Knoten oder mehr
 	private int numVertices;
 	private boolean directed;
 	

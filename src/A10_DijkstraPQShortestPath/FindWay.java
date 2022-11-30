@@ -6,11 +6,11 @@ import java.util.List;
 
 public abstract class FindWay {
 	protected Graph graph;
-	protected int[] pred;
+	protected int[] pred; //VorgängerArray
 	
 	public FindWay(Graph graph) {
 		this.graph = graph;
-		this.pred = new int[graph.numVertices()];
+		this.pred = new int[graph.numVertices()]; //Vorgänger abgelegt
 	}
 
 	/**
@@ -22,7 +22,7 @@ public abstract class FindWay {
 	public List<Integer> findWay(int from, int to) {
 		initPathSearch();
 		if (!calculatePath(from, to)) {
-			return null;
+			return null; //bei false --> keinen Weg gefunden, return null
 		}
 		return createWay(from, to);
 	}
@@ -43,10 +43,16 @@ public abstract class FindWay {
 	 * @param to Zielknoten
 	 * @return Weg als Liste
 	 */
-	protected ArrayList<Integer> createWay(int from, int to) {
-		ArrayList<Integer> way = new ArrayList<Integer>();
+	protected ArrayList<Integer> createWay(int from, int to) { //Weg von hinten nach vorne durchlaufen
+		ArrayList<Integer> way = new ArrayList<Integer>(); //Weg ist im pred gespeichert
+			int currentVertex = to; //Knoten wo wir starten, weiß über welchen Vorgänger erreichbar ist
+			while (from != currentVertex) {
+				way.add(0, currentVertex); //fügen Weg bzw. Current Knoten hinzu
+				currentVertex = pred[currentVertex]; //holen uns Vorgänger
 
-		// TODO: IHRE IMPLEMENTIERUNG
+
+			}
+			way.add(0, from); //letzter Vertex 0, deshalb manuell hinzufügen
 
 		return way;
 	}
