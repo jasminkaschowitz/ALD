@@ -8,7 +8,7 @@ import A05_Breitensuche.Node;
 
 public class Tiefensuche extends BaseTree<Film> {
 
-	ArrayList<String> listOfNodes = new ArrayList<>();
+
 
 	@Override
 	/**
@@ -25,24 +25,10 @@ public class Tiefensuche extends BaseTree<Film> {
 	 * @return Liste der Titel in symmetrischer Reihenfolge
 	 */
 	public List<String> getNodesInOrder(Node<Film> node) {
-		Film start = new Film(node.getValue().getTitel(), node.getValue().getLänge());
+		return null;
 
 
-			if (start != null) {
-			;}
-		listOfNodes.add(node.getValue().getTitel());
-		String se = node.getValue().getTitel();
 
-		if (node.getParent() != node) {
-			node = node.getParent();
-			String n = node.getValue().getTitel();		}
-
-		if (node.getRight() != null) {
-			getNodesInOrder(node.getRight());
-		}
-
-
-		return listOfNodes;
 	}
 	
 	/**
